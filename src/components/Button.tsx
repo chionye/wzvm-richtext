@@ -3,6 +3,8 @@ import { Icon } from '@iconify/react';
 
 const Button = {
     Add: ({handleClick}: {handleClick: (mediaType: string) => void}) => {
+        const [toggle, setToggle] = useState<boolean>(false);
+
         type DropDownProp = {
             Icon: React.ReactNode,
             title: string,
@@ -28,7 +30,6 @@ const Button = {
             },
         ];
 
-        const [toggle, setToggle] = useState<boolean>(false);
         return (
             <>
                 <button type="button" title="Add (Image, Social, Video)" className='bg-green-100 p-2 rounded-full' onClick={() => setToggle(!toggle)}>
@@ -75,11 +76,13 @@ const Button = {
     },
     DropDown: ({icon} : {icon: React.ReactNode}) => {
         const [toggle, setToggle] = useState<boolean>(false);
+
         type header = {
             title: string,
             classname: string
         }[]
-        const dropDownOptions: header = [
+
+        const headerOptions: header = [
             {
                 title: "Header 1",
                 classname: "text-2xl"
@@ -105,6 +108,7 @@ const Button = {
                 classname: "text-xs"
             },
         ];
+
         return (
             <>
                 <button type="button" title="Text size" className='border p-1 flex justify-center hover:text-blue-500 col-span-2' onClick={() => setToggle(!toggle)}>
@@ -112,7 +116,7 @@ const Button = {
                 </button>
                 {toggle && 
                     (<div className='dropdown absolute grid grid-rows w-32 mt-8 bg-white'>
-                    {dropDownOptions.map((items: {
+                    {headerOptions.map((items: {
                         title: string,
                         classname: string
                     }) => (

@@ -20,7 +20,9 @@ function Modal({media, handleClick}: {media: string | null, handleClick: (mediaT
                         <Embed.Image /> :
                         media === "Video" ?
                         <Embed.Video />  :
-                        <Embed.Social />
+                        media === "Social" ?
+                        <Embed.Social /> :
+                        <Embed.Link />
                     }
                     <div className='flex justify-start gap-2 mt-3'>
                         <Button.Submit text='Embed' handleClick={() => handleSubmit}/>

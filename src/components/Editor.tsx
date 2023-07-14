@@ -5,6 +5,8 @@ import Modal from "./Modal";
 
 function Editor(){
     const [media, setMedia] = useState<string | null>(null);
+    const [toggleToolbar, setToggleToolbar] = useState<boolean>(true);
+    const [toggleAddButton, setToggleAddButton] = useState<boolean>(true);
 
     const handleClick = (mediaType: string | null) => {
         setMedia(mediaType);
@@ -22,12 +24,12 @@ function Editor(){
                     <div className="border h-12"></div>
                     <div className="border md:p-3 p-1">
                         <div className="py-2">
-                            <div contentEditable="true" className="outline-0 font-bold text-3xl text-gray-700" data-placeholder="Add post title"></div>
+                            <div contentEditable="true" className="outline-0 font-bold text-3xl text-gray-700 title" data-placeholder="Add post title"></div>
                         </div>
-                        <Toolbar />
+                        {!toggleToolbar && <Toolbar />}
                         <div className="py-2 h-96">
-                            <div contentEditable="true" className="outline-0 py-2"></div>
-                            <Button.Add handleClick={handleClick}/>
+                            <div contentEditable="true" className="outline-0 py-2 main-content" onFocus={() => setToggleToolbar(false)} onKeyUp={() => setToggleAddButton(false)} data-placeholder={toggleToolbar ? "Add content" : ""}></div>
+                            {!toggleAddButton && <Button.Add handleClick={handleClick}/>}
                         </div>
                     </div>
                     <div className="border p-1 px-2 text-right">

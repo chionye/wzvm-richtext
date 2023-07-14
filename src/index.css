@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-[data-placeholder]:empty:before {
+.title:empty:before {
     content: attr(data-placeholder);
+}
+.main-content:empty:before {
+    content: attr(data-placeholder);
+    color:#B2BEB5
 }

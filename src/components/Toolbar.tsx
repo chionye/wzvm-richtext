@@ -67,6 +67,7 @@ function Toolbar(){
             name: "indent"
         },
     ];
+    
     return (
         <div className='grid grid-cols-12'>
             {tools.map((items: {
