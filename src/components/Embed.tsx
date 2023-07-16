@@ -6,7 +6,7 @@ import { Context } from '../hooks/FormatContext';
 
 const Embed = {
     Image: () => {
-        const imageContext = useContext(Context);
+        const imageContext = useContext(Context)!;
         const inputRef = useRef<HTMLInputElement | null>(null);
         const [image, setImage] = useState<string>();
         const handleClick = () => {
@@ -20,7 +20,7 @@ const Embed = {
             }
             const file = URL.createObjectURL(fileObj)
             setImage(file)
-            imageContext?.handleInput(event, file);
+            imageContext.handleInput(event, file);
         };
 
         return (
@@ -41,21 +41,21 @@ const Embed = {
         )
     },
     Video: () => {
-        const video = useContext(Context);
+        const video = useContext(Context)!;
         return (
             <>
-                <FormInput.Select name='social' title='social' options={SocialOptions} label='VIDEO PROVIDER' value={video?.inputForm} handleSelect={video?.handleInput}/>
-                <FormInput.Text name='url' title='social' label='URL' value={video?.inputForm.url} handleChange={video?.handleInput}/>
+                <FormInput.Select name='social' title='social' options={SocialOptions} label='VIDEO PROVIDER' value={video.inputForm.social} handleSelect={(e)=> video.handleInput(e, null)}/>
+                <FormInput.Text name='url' title='social' label='URL' value={video?.inputForm.url} handleChange={(e)=> video.handleInput(e, null)}/>
             </>
         )
     },
     Social: () => {
-        const social = useContext(Context);
+        const social = useContext(Context)!;
         return (
             <>
-                <FormInput.Select name='social' title='media' options={SocialOptions} label='SOCIAL MEDIA PLATFORM' value={social?.inputForm.social} handleSelect={social?.handleInput}/>
-                <FormInput.Text name='url' title='url' label='URL' handleChange={social?.handleInput} value={social?.inputForm.url}/>
-                <FormInput.Text name='code' title='code' label='CODE' handleChange={social?.handleInput} value={social?.inputForm.code}/>
+                <FormInput.Select name='social' title='media' options={SocialOptions} label='SOCIAL MEDIA PLATFORM' value={social?.inputForm.social} handleSelect={(e)=>social.handleInput(e, null)}/>
+                <FormInput.Text name='url' title='url' label='URL' handleChange={(e)=>social.handleInput(e, null)} value={social.inputForm.url}/>
+                <FormInput.Text name='code' title='code' label='CODE' handleChange={(e)=>social.handleInput(e, null)} value={social.inputForm.code}/>
                 <div className='flex justify-between'>
                     <p className='text-slate-500 mt-3'>Disable caption</p>
                     <div className='text-slate-500 mt-3'>
@@ -66,10 +66,10 @@ const Embed = {
         )
     },
     Link: () => {
-        const link = useContext(Context);
+        const link = useContext(Context)!;
         return (
             <>
-                <FormInput.Text name='url' title='url' label='URL' value={link?.inputForm.url} handleChange={link?.handleInput}/>
+                <FormInput.Text name='url' title='url' label='URL' value={link?.inputForm.url} handleChange={(e)=>link.handleInput(e, null)}/>
             </>
         )
     }

@@ -5,7 +5,7 @@ import Modal from "./Modal";
 import { Context } from '../hooks/FormatContext';
 
 function Editor(){
-    const editor =  useContext(Context);
+    const editor =  useContext(Context)!;
     const [toggleToolbar, setToggleToolbar] = useState<boolean>(false);
     const [attachButton, setAttachButton] = useState<boolean>(false);
 
@@ -15,7 +15,7 @@ function Editor(){
     
     return (
         <>
-            {editor?.modal ? <Modal media={editor.modal} handleClick={editor.openModal}/> : null}
+            {editor.modal ? <Modal media={editor.modal} handleClick={editor.openModal}/> : null}
             <div className='container mx-auto'>
                 <div className="md:w-2/3 w-full px-3 mx-auto mt-16"> 
                     <div className="border h-12"></div>
@@ -25,12 +25,12 @@ function Editor(){
                         </div>
                         {toggleToolbar && <Toolbar />}
                         <div className="py-2 min-h-[450px]">
-                            <div contentEditable="true" className="outline-0 py-2 main-content" suppressContentEditableWarning={true} onFocus={() => setToggleToolbar(true)} onKeyUp={() => setAttachButton(true)} data-placeholder={!toggleToolbar ? "Add content" : ""} onKeyDown={(e) => editor?.handleCount(e)}>{editor?.text}</div>
-                            {attachButton && <Button.Attachment handleClick={editor?.handleClick}/>}
+                            <div contentEditable="true" className="outline-0 py-2 main-content" suppressContentEditableWarning={true} onFocus={() => setToggleToolbar(true)} onKeyUp={() => setAttachButton(true)} data-placeholder={!toggleToolbar ? "Add content" : ""} onKeyDown={(e) => editor.handleCount(e)}></div>
+                            {attachButton && <Button.Attachment handleClick={editor.handleClick}/>}
                         </div>
                     </div>
                     <div className="border p-1 px-2 text-right">
-                        {editor?.count}/1000 words
+                        {editor.count}/1000 words
                     </div>
                     <div className="flex justify-end">
                         <Button.Submit text="Post" handleClick={handleSubmit}/>

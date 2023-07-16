@@ -1,7 +1,7 @@
 export const commandsWithValue = ["H1", "H2", "H3", "H4", "H5", "H6", "CreateLink", "Picture", "Video", "Social"];
 
-export const formatText = (command, showUI, value) => {
-    document.execCommand(command, showUI, value);
+export const formatText = (command: string, showUI:boolean, value:string | null) => {
+    document.execCommand(command, showUI, value!);
 };
 
 export const insertMedia = (src: string, buttonPressed: string, div: Element) => {
@@ -11,11 +11,11 @@ export const insertMedia = (src: string, buttonPressed: string, div: Element) =>
     div.appendChild(child);
 }
 
-export const insertLink = (src, innertext, div: Element) => {
-    const element = `<a href='${src}' target="_blank">${innertext}</a>`;
+export const insertLink = (src: string, selectedText:Selection, div: Element) => {
+    const element = `<a href='${src}' target="_blank">${selectedText.toString()}</a>`;
     const content = div.innerHTML;
-    const start = innertext.anchorOffset;
-    const end = innertext.toString().length + start;
+    const start = selectedText.anchorOffset;
+    const end = selectedText.toString().length + start;
     const replaceWithLink = replaceText(content, start, end, element);
     div.innerHTML = replaceWithLink
     console.log(content, start, end, element, replaceWithLink)

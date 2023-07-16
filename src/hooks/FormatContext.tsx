@@ -7,7 +7,7 @@ const Context = createContext<contextProp | null>(null);
 function FormatContextProvider({children}: {children: React.ReactNode}) {
     const [buttonPressed, setButtonPressed] = useState<string>("");
     const [modal, setModal] = useState<string | null | HTMLInputElement>(null);
-    const [selected, setSelected] = useState<string>("");
+    const [selected, setSelected] = useState<Selection>();
     const [inputForm, setInputForm] = 
     useState<formProp>({
         url: "",
@@ -16,7 +16,7 @@ function FormatContextProvider({children}: {children: React.ReactNode}) {
         code: null,
     })
     const [count, setCount] = useState<number>(0);
-    const div = document.querySelector('.main-content');
+    const div = document.querySelector('.main-content')!;
 
     const handleClick = (e: React.MouseEvent) => {
         const id = e.currentTarget.id;
@@ -29,7 +29,7 @@ function FormatContextProvider({children}: {children: React.ReactNode}) {
                 id === "Social"
                ){
                 openModal(id);
-                setSelected(window.getSelection());
+                setSelected(window.getSelection()!);
             }else{
                 formatText("formatBlock", false, id);
             }
@@ -47,21 +47,22 @@ function FormatContextProvider({children}: {children: React.ReactNode}) {
             const data = buttonPressed === "Picture" ? inputForm.picture : inputForm.url;
             insertMedia(data, buttonPressed, div)
         }else if(buttonPressed === "CreateLink"){
-            insertLink(inputForm.url, selected, div);
+            insertLink(inputForm.url, selected!, div);
         }
         setModal(null);
     }
 
-    const handleCount = (event: React.KeyboardEvent) => {
-        const words= event.currentTarget.innerText;
+    const handleCount = (event: React.KeyboardEvent<HTMLDivElement>) => {
+        const words = event.currentTarget.innerText;
         const wordCount = words.split(" ").length;
         setCount(wordCount);
     }
 
     const handleInput = (event: React.ChangeEvent, element: string | null) => {
+        const { target } = event
         setInputForm({
             ...inputForm,
-            [event.target.name]: element == null ? event.target.value : element
+            [(target as HTMLInputElement).name]: element == null ? (target as HTMLInputElement).value : element
         });
     }
 
