@@ -1,10 +1,14 @@
-import {useRef} from 'react';
+import {useRef, useState, useContext} from 'react';
 import Button from './Button';
-import Input from './Input';
+import FormInput from './FormInput';
+import SocialOptions from '../data/SocialOptions';
+import { Context } from '../hooks/FormatContext';
 
 const Embed = {
     Image: () => {
+        const imageContext = useContext(Context);
         const inputRef = useRef<HTMLInputElement | null>(null);
+        const [image, setImage] = useState<string>();
         const handleClick = () => {
             inputRef.current?.click();
         };
@@ -14,79 +18,58 @@ const Embed = {
             if (!fileObj) {
                 return;
             }
-
-            event.target.value = "";
-
-            console.log(event.target.files);
-
-            console.log(fileObj);
-            console.log(fileObj.name);
+            const file = URL.createObjectURL(fileObj)
+            setImage(file)
+            imageContext?.handleInput(event, file);
         };
 
         return (
             <>
-                <p className='text-slate-500 mt-2'>Upload image</p>
-                <p className='text-slate-500 my-2'>FILE UPLOAD</p>
-                <input
-                    className='hidden'
-                    title='file'
-                    ref={inputRef}
-                    type="file"
-                    onChange={handleFileChange}
+                <FormInput.File
+                    visible='hidden'
+                    inputRef={inputRef}
+                    handleFileChange={handleFileChange}
                 />
                 <div className='border-dashed border-2 border-gray-300 h-32 flex justify-center items-center bg-slate-100 rounded-md'>
-                    <Button.Outline text='Import Image from Device' title='Click to browse' handleClick={handleClick}/>
+                    {!image ?
+                    <Button.Outline text='Import Image from Device' title='Click to browse' handleClick={handleClick}/> 
+                    :
+                    <img src={image} alt="Uploaded Image" className='w-32'/>
+                    }
                 </div>
             </>
         )
     },
     Video: () => {
-        const options: string[] = ["Youtube", "Facebook", "Twitter", "LinkedIn", "Threads"];
+        const video = useContext(Context);
         return (
             <>
-                <p className='text-slate-500 my-2'>VIDEO PROVIDER</p>
-                <div>
-                    <Input.Select name='social' title='social' options={options}/>
-                </div>
-                <p className='text-slate-500 mb-2 mt-5'>URL</p>
-                <div>
-                    <Input.Text name='social' title='social'/>
-                </div>
+                <FormInput.Select name='social' title='social' options={SocialOptions} label='VIDEO PROVIDER' value={video?.inputForm} handleSelect={video?.handleInput}/>
+                <FormInput.Text name='url' title='social' label='URL' value={video?.inputForm.url} handleChange={video?.handleInput}/>
             </>
         )
     },
     Social: () => {
-        const options: string[] = ["Youtube", "Facebook", "Twitter", "LinkedIn", "Threads"];
+        const social = useContext(Context);
         return (
             <>
-                <p className='text-slate-500 my-2'>SOCIAL MEDIA PLATFORM</p>
-                <div>
-                    <Input.Select name='media' title='media' options={options}/>
-                </div>
-                <p className='text-slate-500 mb-2 mt-5'>URL</p>
-                <div>
-                    <Input.Text name='url' title='url'/>
-                </div>
-                <p className='text-slate-500 mb-2 mt-5'>CODE</p>
-                <div>
-                    <Input.Text name='url' title='url'/>
-                </div>
+                <FormInput.Select name='social' title='media' options={SocialOptions} label='SOCIAL MEDIA PLATFORM' value={social?.inputForm.social} handleSelect={social?.handleInput}/>
+                <FormInput.Text name='url' title='url' label='URL' handleChange={social?.handleInput} value={social?.inputForm.url}/>
+                <FormInput.Text name='code' title='code' label='CODE' handleChange={social?.handleInput} value={social?.inputForm.code}/>
                 <div className='flex justify-between'>
                     <p className='text-slate-500 mt-3'>Disable caption</p>
                     <div className='text-slate-500 mt-3'>
-                        <Input.Switch/>
+                        <FormInput.Switch/>
                     </div> 
                 </div>
             </>
         )
     },
     Link: () => {
+        const link = useContext(Context);
         return (
             <>
-                <p className='text-slate-500 mb-2 mt-5'>URL</p>
-                <div>
-                    <Input.Text name='url' title='url'/>
-                </div>
+                <FormInput.Text name='url' title='url' label='URL' value={link?.inputForm.url} handleChange={link?.handleInput}/>
             </>
         )
     }

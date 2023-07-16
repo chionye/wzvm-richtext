@@ -1,12 +1,12 @@
+import { useContext } from 'react';
 import { Icon } from '@iconify/react';
 import Button from './Button';
 import Embed from './Embed';
+import { Context } from '../hooks/FormatContext';
 
-function Modal({media, handleClick}: {media: string | null, handleClick: (mediaType: string | null) => void}){
-    const handleSubmit = () => {
-        console.log("submitting");
-    }
+function Modal({media, handleClick}: {media: string | null | HTMLInputElement, handleClick: (mediaType: string | null) => void}){
 
+    const formHandler = useContext(Context);
     return (
             <div className='h-full w-full bg-gray-300 absolute top-0 z-50'>
             <div className='flex justify-center items-center h-full'>
@@ -25,7 +25,7 @@ function Modal({media, handleClick}: {media: string | null, handleClick: (mediaT
                         <Embed.Link />
                     }
                     <div className='flex justify-start gap-2 mt-3'>
-                        <Button.Submit text='Embed' handleClick={() => handleSubmit}/>
+                        <Button.Submit text='Embed' handleClick={formHandler?.handleSubmit}/>
                         <Button.Outline text='Cancel' title='Cancel' handleClick={handleClick}/>
                     </div>
                 </div>

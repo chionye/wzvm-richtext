@@ -1,9 +1,12 @@
-import Editor from './components/Editor'
+import Editor from './components/Editor';
+import { FormatContextProvider } from './hooks/FormatContext';
 
 function App() {
 
   return (
-    <Editor />
+    <FormatContextProvider>
+      <Editor />
+    </FormatContextProvider>
   )
 }
 

@@ -9,3 +9,37 @@
     content: attr(data-placeholder);
     color:#B2BEB5
 }
+ul > li{
+    list-style-type: disc !important;
+}
+ol > li {
+    list-style-type:decimal !important;
+}
+h1{
+    font-size: 2em !important;
+    font-weight: bolder !important;
+}
+h2{
+    font-size: 1.5em !important;
+    font-weight: bolder !important;
+}
+h3 {
+    font-size: 1.17em !important;
+    font-weight: bolder !important;
+}
+h4 {
+    font-size: 1em !important;
+    font-weight: bolder !important;
+}
+h5 {
+    font-size: .83em !important;
+    font-weight: bolder !important;
+}
+h6 {
+    font-size: .67em !important;
+    font-weight: bolder !important;
+}
+a{
+    text-decoration:underline !important;
+    color: blue !important;
+}

@@ -1,24 +1,21 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Toolbar from "./Toolbar";
 import Button from "./Button";
 import Modal from "./Modal";
+import { Context } from '../hooks/FormatContext';
 
 function Editor(){
-    const [media, setMedia] = useState<string | null>(null);
-    const [toggleToolbar, setToggleToolbar] = useState<boolean>(true);
-    const [toggleAddButton, setToggleAddButton] = useState<boolean>(true);
-
-    const handleClick = (mediaType: string | null) => {
-        setMedia(mediaType);
-    }
+    const editor =  useContext(Context);
+    const [toggleToolbar, setToggleToolbar] = useState<boolean>(false);
+    const [attachButton, setAttachButton] = useState<boolean>(false);
 
     const handleSubmit = () => {
-        console.log("submitting");
+        alert("submitted");
     }
     
     return (
         <>
-            {media ? <Modal media={media} handleClick={handleClick}/> : null}
+            {editor?.modal ? <Modal media={editor.modal} handleClick={editor.openModal}/> : null}
             <div className='container mx-auto'>
                 <div className="md:w-2/3 w-full px-3 mx-auto mt-16"> 
                     <div className="border h-12"></div>
@@ -26,14 +23,14 @@ function Editor(){
                         <div className="py-2">
                             <div contentEditable="true" className="outline-0 font-bold text-3xl text-gray-700 title" data-placeholder="Add post title"></div>
                         </div>
-                        {!toggleToolbar && <Toolbar />}
-                        <div className="py-2 h-96">
-                            <div contentEditable="true" className="outline-0 py-2 main-content" onFocus={() => setToggleToolbar(false)} onKeyUp={() => setToggleAddButton(false)} data-placeholder={toggleToolbar ? "Add content" : ""}></div>
-                            {!toggleAddButton && <Button.Add handleClick={handleClick}/>}
+                        {toggleToolbar && <Toolbar />}
+                        <div className="py-2 min-h-[450px]">
+                            <div contentEditable="true" className="outline-0 py-2 main-content" suppressContentEditableWarning={true} onFocus={() => setToggleToolbar(true)} onKeyUp={() => setAttachButton(true)} data-placeholder={!toggleToolbar ? "Add content" : ""} onKeyDown={(e) => editor?.handleCount(e)}>{editor?.text}</div>
+                            {attachButton && <Button.Attachment handleClick={editor?.handleClick}/>}
                         </div>
                     </div>
                     <div className="border p-1 px-2 text-right">
-                        0/1000 words
+                        {editor?.count}/1000 words
                     </div>
                     <div className="flex justify-end">
                         <Button.Submit text="Post" handleClick={handleSubmit}/>
