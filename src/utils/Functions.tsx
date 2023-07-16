@@ -18,7 +18,6 @@ export const insertLink = (src: string, selectedText:Selection, div: Element) =>
     const end = selectedText.toString().length + start;
     const replaceWithLink = replaceText(content, start, end, element);
     div.innerHTML = replaceWithLink
-    console.log(content, start, end, element, replaceWithLink)
 }
 
 export const replaceText = (origin: string, startIndex: number, endIndex: number, insertion: string)=>{
