@@ -17,7 +17,3 @@ export const insertLink = (src: string, selectedText:Selection) => {
     a.target = '_blank';
     selectedText.getRangeAt(0).surroundContents(a);
 }
-
-export const replaceText = (origin: string, startIndex: number, endIndex: number, insertion: string)=>{
-    return origin.substring(0, startIndex) + insertion + origin.substring(endIndex);
-}
