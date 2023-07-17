@@ -13,7 +13,7 @@ type contextProp = {
     handleClick: (e: React.MouseEvent) => void,
     handleSubmit: () => void,
     handleInput: (e: React.ChangeEvent, element: string | null) => void,
-    handleCount: (e: React.KeyboardEvent<HTMLDivElement>) => void,
+    handleWordCount: (e: React.KeyboardEvent<HTMLDivElement>) => void,
     openModal: (mediaType: string | null) => void,
 }
 

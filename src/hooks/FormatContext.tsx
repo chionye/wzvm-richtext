@@ -8,7 +8,7 @@ function FormatContextProvider({children}: {children: React.ReactNode}) {
     const [buttonPressed, setButtonPressed] = useState<string>("");
     const [modal, setModal] = useState<string | null | HTMLInputElement>(null);
     const [selected, setSelected] = useState<Selection>();
-    const [inputForm, setInputForm] = 
+    const [inputForm, setInputForm] =
     useState<formProp>({
         url: "",
         picture: "",
@@ -52,7 +52,7 @@ function FormatContextProvider({children}: {children: React.ReactNode}) {
         setModal(null);
     }
 
-    const handleCount = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    const handleWordCount = (event: React.KeyboardEvent<HTMLDivElement>) => {
         const words = event.currentTarget.innerText;
         const wordCount = words.split(" ").length;
         setCount(wordCount);
@@ -67,7 +67,7 @@ function FormatContextProvider({children}: {children: React.ReactNode}) {
     }
 
     return (
-    <Context.Provider value={{buttonPressed, count, inputForm, handleClick, modal, openModal, handleSubmit, handleCount, handleInput}}>
+    <Context.Provider value={{buttonPressed, count, inputForm, modal, handleClick, openModal, handleSubmit, handleWordCount, handleInput}}>
       {children}
     </Context.Provider>
   );
