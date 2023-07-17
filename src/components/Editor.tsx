@@ -26,7 +26,7 @@ function Editor(){
                         {toggleToolbar && <Toolbar />}
                         <div className="py-2 min-h-[450px]">
                             <div contentEditable="true" className="outline-0 py-2 main-content" suppressContentEditableWarning={true} onFocus={() => setToggleToolbar(true)} onKeyUp={() => setAttachButton(true)} data-placeholder={!toggleToolbar ? "Add content" : ""} onKeyDown={(e) => editor.handleWordCount(e)}></div>
-                            {attachButton && <Button.Attachment handleClick={editor.handleClick}/>}
+                            {attachButton && <Button.AttachMedia handleClick={editor.handleClick}/>}
                         </div>
                     </div>
                     <div className="border p-1 px-2 text-right">

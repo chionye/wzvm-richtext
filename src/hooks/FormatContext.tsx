@@ -47,7 +47,7 @@ function FormatContextProvider({children}: {children: React.ReactNode}) {
             const data = buttonPressed === "Picture" ? inputForm.picture : inputForm.url;
             insertMedia(data, buttonPressed, div)
         }else if(buttonPressed === "CreateLink"){
-            insertLink(inputForm.url, selected!, div);
+            insertLink(inputForm.url, selected!);
         }
         setModal(null);
     }

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Icon } from '@iconify/react';
-import AttachmentOptions from '../data/AttachmentOptions';
+import MediaDropdowOptions from '../data/MediaDropdowOptions';
 import HeaderOptions from '../data/HeaderOptions';
 
 
 const Button = {
-    Attachment: ({handleClick}: {handleClick: ((e: React.MouseEvent) => void) | undefined}) => {
+    AttachMedia: ({handleClick}: {handleClick: ((e: React.MouseEvent) => void) | undefined}) => {
         const [toggleDropdown, setToggleDropdown] = useState<boolean>(false);
 
         return (
@@ -20,7 +20,7 @@ const Button = {
                 {toggleDropdown && 
                     <div className='dropdown border absolute grid grid-rows pr-5 w-fit mt-1 bg-white'>
                         <p className='p-2'><strong className='text-slate-400 text-sm'>EMBEDS</strong></p>
-                        {AttachmentOptions.map((items) => 
+                        {MediaDropdowOptions.map((items) => 
                             <>
                                 <div className='p-1 flex justify-start cursor-pointer hover:bg-slate-50' onClick={handleClick} id={items.title}>
                                     <div className='mt-[0.4rem] mr-2 ml-1'>

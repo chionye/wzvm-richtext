@@ -11,13 +11,11 @@ export const insertMedia = (src: string, buttonPressed: string, div: Element) =>
     div.appendChild(child);
 }
 
-export const insertLink = (src: string, selectedText:Selection, div: Element) => {
-    const element = `<a href='${src}' target="_blank">${selectedText.toString()}</a>`;
-    const content = div.innerHTML;
-    const start = selectedText.anchorOffset;
-    const end = selectedText.toString().length + start;
-    const replaceWithLink = replaceText(content, start, end, element);
-    div.innerHTML = replaceWithLink
+export const insertLink = (src: string, selectedText:Selection) => {
+    const a = document.createElement('a');
+    a.href = src;
+    a.target = '_blank';
+    selectedText.getRangeAt(0).surroundContents(a);
 }
 
 export const replaceText = (origin: string, startIndex: number, endIndex: number, insertion: string)=>{

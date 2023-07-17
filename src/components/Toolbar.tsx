@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import ToolsOptions from '../data/ToolsOptions';
+import ToolbarOptions from '../data/ToolbarOptions';
 import Button from './Button';
 import { Context } from '../hooks/FormatContext';
 
@@ -9,7 +9,7 @@ function Toolbar(){
 
     return (
         <div className='grid grid-cols-12'>
-            {ToolsOptions.map((items) => 
+            {ToolbarOptions.map((items) => 
                 items.title === "Paragraph" ? 
                 <Button.Paragragh icon={items.icon} handleClick={btnClick?.handleClick}/>
                 :

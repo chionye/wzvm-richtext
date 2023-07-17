@@ -7,7 +7,7 @@ type ToolProp = {
     id?: string,
 }[];
 
-const ToolsOptions: ToolProp = [
+const ToolbarOptions: ToolProp = [
     {
         icon: <div className='flex items-center'>
                 <span className='md:pr-5 pr-1 text-[9px] md:text-sm'>Paragraph</span> 
@@ -79,4 +79,4 @@ const ToolsOptions: ToolProp = [
     },
 ];
 
-export default ToolsOptions;
+export default ToolbarOptions;

@@ -1,13 +1,13 @@
 import { Icon } from '@iconify/react';
 
-type AttachmentProp = {
+type MediaDropdownProp = {
     icon: React.ReactNode,
     title: string,
     text: string,
     action?: React.ReactNode
 }[];
 
-const AttachmentOptions: AttachmentProp = [
+const MediaDropdowOptions: MediaDropdownProp = [
     {
         icon: <Icon icon="bi:image-fill" />,
         title: "Picture",
@@ -25,4 +25,4 @@ const AttachmentOptions: AttachmentProp = [
     },
 ];
 
-export default AttachmentOptions;
+export default MediaDropdowOptions;
