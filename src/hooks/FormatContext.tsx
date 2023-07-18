@@ -28,8 +28,8 @@ function FormatContextProvider({children}: {children: React.ReactNode}) {
                 id === "Video" ||
                 id === "Social"
                ){
-                openModal(id);
                 setSelected(window.getSelection()!);
+                openModal(id);
             }else{
                 formatText("formatBlock", false, id);
             }

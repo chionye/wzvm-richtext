@@ -15,5 +15,6 @@ export const insertLink = (src: string, selectedText:Selection) => {
     const a = document.createElement('a');
     a.href = src;
     a.target = '_blank';
+    a.title = src;
     selectedText.getRangeAt(0).surroundContents(a);
 }
